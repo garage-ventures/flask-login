@@ -171,7 +171,7 @@ class LoginManager(object):
             session['next'] = make_next_param(login_url, request.url)
             redirect_url = make_login_url(login_view)
         else:
-            redirect_url = make_login_url(login_view, next_url=request.url)
+            redirect_url = make_login_url(login_view, next_url=make_next_param(login_url, request.url))
 
         return redirect(redirect_url)
 

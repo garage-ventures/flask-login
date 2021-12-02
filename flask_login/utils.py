@@ -78,6 +78,9 @@ def make_next_param(login_url, current_url):
 
     if (not l_url.scheme or l_url.scheme == c_url.scheme) and \
             (not l_url.netloc or l_url.netloc == c_url.netloc):
+
+        if (request.headers["x-forwarded-proto"] != c_url.scheme):
+            return urlunparse((request.headers["x-forwarded-proto"], c_url.netloc, c_url.path, c_url.params, c_url.query, ''))
         return urlunparse(('', '', c_url.path, c_url.params, c_url.query, ''))
     return current_url
 
